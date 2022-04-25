@@ -28,31 +28,31 @@ jobs:
         keystore_alias_password: ${{ secrets.KEYSTORE_PASSWORD_SECRET }}
         keystore_alias: frog
       run: |
-        git clone --depth=1 --branch=master https://github.com/youngterror3/sidus-victor
-        cd sidus-victor
-        sed -i 's/applicationId "io.youngterror3.sidus-victor"/applicationId "io.youngterror3.sidus-victor.be"/g' android/build.gradle
-        sed -i 's/"io.youngterror3.sidus-victor"/"io.youngterror3.sidus-victor.be"/g' android/AndroidManifest.xml
-        sed -i 's/sidus-victor/sidus-victor BE/g' android/res/values/strings.xml
+        git clone --depth=1 --branch=master https://github.com/youngterror3/Mindustry
+        cd Mindustry
+        sed -i 's/applicationId "io.anuke.mindustry"/applicationId "io.anuke.mindustry.be"/g' android/build.gradle
+        sed -i 's/"io.anuke.mindustry"/"io.anuke.mindustry.be"/g' android/AndroidManifest.xml
+        sed -i 's/Mindustry/Mindustry BE/g' android/res/values/strings.xml
         ./gradlew pack
         ./gradlew desktop:dist server:dist android:assembleRelease -Pbuildversion=${RELEASE_VERSION} -PversionType=bleeding-edge --stacktrace
-        mv desktop/build/libs/Sidus Victor.jar desktop/build/libs/Sidus-victor-BE-Desktop-${RELEASE_VERSION}.jar
-        mv server/build/libs/server-release.jar server/build/libs/Sidus-victor-BE-Server-${RELEASE_VERSION}.jar
-        mv android/build/outputs/apk/standard/release/android-standard-release.apk android/build/outputs/apk/standard/release/Sidus-victor-BE-Android-${RELEASE_VERSION}.apk
+        mv desktop/build/libs/Mindustry.jar desktop/build/libs/Mindustry-BE-Desktop-${RELEASE_VERSION}.jar
+        mv server/build/libs/server-release.jar server/build/libs/Mindustry-BE-Server-${RELEASE_VERSION}.jar
+        mv android/build/outputs/apk/standard/release/android-standard-release.apk android/build/outputs/apk/standard/release/Mindustry-BE-Android-${RELEASE_VERSION}.apk
     - name: Upload desktop artifacts
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: sidus-victor/desktop/build/libs/Sidus-victor-BE-Desktop-${{ env.RELEASE_VERSION }}.jar
+        file: Mindustry/desktop/build/libs/Mindustry-BE-Desktop-${{ env.RELEASE_VERSION }}.jar
         tag: ${{ github.ref }}
     - name: Upload server artifacts
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: sidus-victor/server/build/libs/Sidus-victor-BE-Server-${{ env.RELEASE_VERSION }}.jar
+        file: Mindustry/server/build/libs/Mindustry-BE-Server-${{ env.RELEASE_VERSION }}.jar
         tag: ${{ github.ref }}
     - name: Upload Android artifacts
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: sidus-victor/android/build/outputs/apk/standard/release/Sidus-victor-BE-Android-${{ env.RELEASE_VERSION }}.apk
+        file: Mindustry/android/build/outputs/apk/standard/release/Mindustry-BE-Android-${{ env.RELEASE_VERSION }}.apk
         tag: ${{ github.ref }}
