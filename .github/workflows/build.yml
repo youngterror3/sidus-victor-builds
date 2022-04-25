@@ -28,7 +28,7 @@ jobs:
         keystore_alias_password: ${{ secrets.KEYSTORE_PASSWORD_SECRET }}
         keystore_alias: frog
       run: |
-        git clone --depth=1 --branch=master https://github.com/youngterror3/sidus-victor/
+        git clone --depth=1 --branch=master https://github.com/youngterror3/sidus-victor
         cd sidus-victor
         sed -i 's/applicationId "io.youngterror3.sidus-victor"/applicationId "io.youngterror3.sidus-victor.be"/g' android/build.gradle
         sed -i 's/"io.youngterror3.sidus-victor"/"io.youngterror3.sidus-victor.be"/g' android/AndroidManifest.xml
