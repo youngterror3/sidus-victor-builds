@@ -22,8 +22,6 @@ jobs:
       run: |
         echo "${{ secrets.KEYSTORE_BASE64 }}" > keystore.txt
         base64 --decode keystore.txt > bekeystore.jks
-    - name: Give permision
-      run: chmod +x ./gradlew
     - name: Create artifacts
       env:
         keystore_password: ${{ secrets.KEYSTORE_PASSWORD_SECRET }}
@@ -32,6 +30,7 @@ jobs:
       run: |
         git clone --depth=1 --branch=main https://github.com/youngterror3/Mindustry
         cd Mindustry
+        chmod +x ./gradlew
         sed -i 's/applicationId "io.anuke.mindustry"/applicationId "io.anuke.mindustry.be"/g' android/build.gradle
         sed -i 's/"io.anuke.mindustry"/"io.anuke.mindustry.be"/g' android/AndroidManifest.xml
         sed -i 's/Mindustry/Mindustry BE/g' android/res/values/strings.xml
